@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}À propos{% endblock %}
+
+{% block header %}
+    <h1>À propos</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h3>Hello World</h3>
+
+        <p class="flow-text">Étant le sujet principal de ce site, je me dois de faire une rapide présentation. Je vais essayer de faire rapide.</p>
+
+        <p class="flow-text">Après deux ans de prépa et un diplôme d'ingénieur de l'<a href="http://www.enseirb-matmeca.fr/">ENSEIRB-MATMECA</a>
+        obtenu en 2014, je suis depuis développeur SI chez <a href="http://www.sewan.fr/">Sewan</a>, dans le Xe arrondissement
+        de Paris. Des milliers d'utilisateurs se servent quotidiennement de l'application aussi bien pour la configuration ou la
+        commande d'outils de télécommunication (routeurs, VoIP, liens d'accès, ...) que pour des besoins de facturation. Cette
+        utilisation pose des problématiques très intéressantes en terme de temps réel, de haute disponiblité et d'interropérabilité
+        avec des systèmes externes.</p>
+
+        <p class="flow-text">Passionné de développement, j'ai très souvent un projet perso sous la main pour mon temps libre, ce qui me permet de découvrir
+        des technos que je n'ai pas forcément l'opportunité d'essayer autrement. J'en ai justement fait la liste sur
+        <a href="{{ url_for('about.about') }}">cette page</a>&nbsp!</p>
+
+        <p class="flow-text">À côté du développement, je suis également guitariste classique à mes heures perdues, passionné de musique, amateur de photographie et de séries.</p>
+
+        <p class="flow-text">Si vous avez une question à me poser ou un commentaire à partager, n'hésitez pas à
+        <a href="{{ url_for('contact.contact') }}">me contacter</a>&nbsp;!</p>
+    </div>
+
+    <div class="row">
+        <h3>À propos du site</h3>
+
+        <p class="flow-text">Vous parcourez actuellement la version 2 du site que j'ai mise au point en septembre 2016.
+        J'ai utilisé le framework web Python <a href="http://flask.pocoo.org/">Flask</a> avec l'ORM
+        <a href="http://www.sqlalchemy.org/">SQLAlchemy</a>. Côté front, je me suis basé sur le framework
+        <a href="http://materializecss.com/">Materialize</a> pour un rendu responsive basé sur Material Design.</p>
+
+        <p class="flow-text">Le tout est servi par un serveur <a href="https://nginx.org/">NGINX</a> sur une machine
+        <a href="https://www.kimsufi.com/fr/">Kimsufi</a> qui ronronne toujours malgré tout ce que je lui demande&nbsp;!</p>
+
+        <p class="flow-text">Si vous êtes intrigué, le code source du projet est
+        <a href="https://github.com/julienc91/julienc_io">disponible sur GitHub</a>.</p>
+    </div>
+
+{% endblock %}

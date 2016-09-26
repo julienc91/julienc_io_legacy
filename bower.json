@@ -1,0 +1,21 @@
+{
+  "name": "julienc_io",
+  "authors": [
+    "julien <github@julienc.io>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "static/bower_components"
+  ],
+  "dependencies": {
+    "fontawesome": "",
+    "jquery": "^2",
+    "jquery-ui": "",
+    "materialize": "",
+    "showdown": ""
+  }
+}

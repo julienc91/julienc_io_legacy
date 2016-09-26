@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Administration{% endblock %}
+
+{% block header %}
+    <h1>Administration</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="s3">
+            <h4><a href="{{ url_for('admin.admin_articles') }}">Articles</a></h4>
+        </div>
+        <div class="s3">
+            <h4><a href="{{ url_for('admin.admin_projects') }}">Projets</a></h4>
+        </div>
+        <div class="s3">
+            <h4><a href="{{ url_for('admin.admin_tags') }}">Tags</a></h4>
+        </div>
+    </div>
+{% endblock %}

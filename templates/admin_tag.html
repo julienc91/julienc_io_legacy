@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Tag{% endblock %}
+
+{% block breadcrumb %}
+    <nav>
+        <div class="nav-wrapper content">
+            <div class="col s12">
+                <a href="{{ url_for('admin.admin') }}" class="breadcrumb">Administration</a>
+                <a href="{{ url_for('admin.admin_tags') }}" class="breadcrumb">Tags</a>
+                {% if tag %}
+                    <span class="breadcrumb">{{ tag.name }}</span>
+                {% else %}
+                    <span class="breadcrumb">Nouveau</span>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block header %}
+    <h1>Tag</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <form class="col s12" action="{{ url_for('admin.admin_tag_update', tag_id=tag.id if tag else 0) }}" method="post" enctype="multipart/form-data">
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="name" name="name" type="text" class="validate" value="{{ name or (tag.name if tag else "")}}" required>
+                    <label for="name">Nom</label>
+                </div>
+            </div>
+
+            {% if tag and tag.image %}
+            <div class="row">
+                <div class="input-field col s10">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>Image</span>
+                            <input type="file" name="image">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="col s2">
+                    <img src="{{ url_for('static', filename=tag.image) }}" alt="" class="responsive-img"/>
+                </div>
+            </div>
+            {% else %}
+            <div class="row">
+                <div class="input-field col s12">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>Image</span>
+                            <input type="file" name="image" required>
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <input class="btn waves-effect waves-light" type="submit" value="Enregistrer">
+
+        </form>
+    </div>
+
+{% endblock %}

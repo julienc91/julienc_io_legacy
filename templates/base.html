@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Julien Chaumont | {% block title %}{% endblock %}</title>
+    <meta name='author' content='Julien Chaumont'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/materialize/dist/css/materialize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/fontawesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% block css %}{% endblock %}
+</head>
+<body>
+
+    <!-- left menu -->
+    <ul id="menu" class="side-nav fixed">
+        <li>
+            <div class="userView">
+                <img class="background" src="{{ url_for('static', filename='images/source_code.jpg') }}" alt="">
+                <span class="white-text name">Julien Chaumont</span>
+                <span class="white-text">Ingénieur, développeur</span>
+                <div class="list-social-networks">
+                    <a href="https://github.com/julienc91"><i class="fa fa-github" aria-hidden="true"></i></a>
+                    <a href="https://stackoverflow.com/users/2679935/julienc"><i class="fa fa-stack-overflow" aria-hidden="true"></i></a>
+                    <a href="https://www.linkedin.com/in/julien-chaumont-188a833b"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    <a href="https://twitter.com/julienc91"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </li>
+        <li class="menu-entry"><a class="waves-effect" href="{{ url_for('articles.articles') }}"><i class="material-icons">rss_feed</i>Articles</a></li>
+        <li class="menu-entry"><a class="waves-effect" href="{{ url_for('projects.projects') }}"><i class="material-icons">code</i>Projets</a></li>
+        <li class="menu-entry"><a class="waves-effect" href="{{ url_for('tags.tags') }}"><i class="material-icons">label_outline</i>Tags</a></li>
+        <li class="menu-entry"><a class="waves-effect" href="{{ url_for('contact.contact' ) }}"><i class="material-icons">message</i>Contact</a></li>
+        <li class="menu-entry"><a class="waves-effect" href="{{ url_for('about.about' ) }}"><i class="material-icons">question_answer</i>À propos</a></li>
+        {% if current_user.is_authenticated %}
+            <li class="menu-entry"><a class="waves-effect" href="{{ url_for('admin.admin') }}"><i class="material-icons">settings</i>Administration</a></li>
+            <li class="menu-entry"><a class="waves-effect" href="{{ url_for('users.logout') }}"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
+        {% endif %}
+    </ul>
+    <a href="#" data-activates="menu" id="collapse-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+
+    {% block breadcrumb %}{% endblock %}
+
+    <!-- header -->
+    <header><div class="content">{% block header %}{% endblock %}</div></header>
+
+
+    <!-- flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flashes {{ category }}">
+                    <div class="content">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
+    <!-- main content -->
+    <main><div class="content">{% block content %}{% endblock %}</div></main>
+
+
+    <!-- footer -->
+    <footer class="page-footer">
+        <div class="footer-copyright content">
+            © 2016 Copyright Julien Chaumont
+        </div>
+    </footer>
+
+
+    <!-- js scripts -->
+    <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/materialize/dist/js/materialize.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+    {% block js %}{% endblock %}
+
+</body>
+</html>

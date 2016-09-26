@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Articles{% endblock %}
+
+{% block header %}
+    <h1>Articles</h1>
+{% endblock %}
+
+
+{% block content %}
+
+    {% for article in articles %}
+    <h3><a href="{{ url_for('articles.article', article_id=article.id, slug=article.slug) }}">{{ article.title }}</a></h3>
+    <div class="row">
+        <div class="col s12 l8">
+            <div class="flow-text">
+                {{ article.content | truncate(256) | markdown }}
+            </div>
+            <div>
+                {% for tag in article.tags | sort(attribute='name') %}
+                    <a href="{{ url_for('tags.tag', slug=tag.slug) }}">
+                        <div class="chip">
+                            <img src="{{ url_for('static', filename=tag.image) }}" alt="">
+                            {{ tag.name }}
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col hide-on-med-and-down l4">
+            <div class="card">
+                <div class="card-image">
+                    <a href="{{ url_for('articles.article', article_id=article.id, slug=article.slug) }}">
+                        <img src="{{ url_for('static', filename=article.image) }}">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}

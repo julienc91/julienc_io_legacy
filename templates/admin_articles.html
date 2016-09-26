@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Articles{% endblock %}
+
+{% block breadcrumb %}
+    <nav>
+        <div class="nav-wrapper content">
+            <div class="col s12">
+                <a href="{{ url_for('admin.admin') }}" class="breadcrumb">Administration</a>
+                <span class="breadcrumb">Articles</span>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block header %}
+    <h1>Articles</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+
+        <div>
+            <a class="waves-effect waves-light btn" href="{{ url_for("admin.admin_article", article_id=None) }}">
+                <i class="material-icons left">add</i>Nouvel article
+            </a>
+        </div>
+
+        {% if articles %}
+
+        <table id="article-list">
+            <thead>
+                <tr>
+                    <th class="hide">ID</th>
+                    <th>Titre</th>
+                    <th>Créé le</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for article in articles | sort(attribute='creation_date', reverse=True) %}
+                <tr>
+                    <td class="id hide">{{ article.id }}</td>
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.creation_date }}</td>
+                    <td class="right-align">
+                        <a href="{{ url_for('admin.admin_article', article_id=article.id) }}"><i class="material-icons">mode_edit</i></a>
+                        <a href="{{ url_for('admin.admin_article_delete', article_id=article.id) }}" onclick="confirm_deletion(this); return false;"><i class="material-icons">delete</i></a></td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+        <div id="confirm-dialog" class="modal">
+            <div class="modal-content">
+                <h4>Confirmation</h4>
+                <p>L'article sera définitivement supprimé. Voulez-vous continuer&nbsp;?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="waves-effect waves-red btn-flat" onclick="$('#confirm-dialog').closeModal(); return false;">Annuler</a>
+                <a href="#" class="waves-effect waves-green btn-flat" id="confirm-dialog-yes">Oui</a>
+           </div>
+        </div>
+
+        {% else %}
+
+            <p>Aucun article</p>
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

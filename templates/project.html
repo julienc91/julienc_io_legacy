@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block breadcrumb %}
+    <nav>
+        <div class="nav-wrapper content">
+            <div class="col s12">
+                <a href="{{ url_for('projects.projects') }}" class="breadcrumb">Projets</a>
+                <span class="breadcrumb">{{ project.name }}</span>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block header %}
+    <h1>{{ project.name }}
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('admin.admin_project', project_id=project.id) }}"><i class="material-icons">mode_edit</i></a>
+    {% endif %}
+    </h1>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s8">
+            <div class="flow-text">
+                {{ project.description | markdown }}
+            </div>
+            <div>
+                {% for tag in project.tags | sort(attribute='name') %}
+                    <a href="{{ url_for('tags.tag', slug=tag.slug) }}">
+                        <div class="chip">
+                            <img src="{{ url_for('static', filename=tag.image) }}" alt="">
+                            {{ tag.name }}
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col s4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{ url_for('static', filename=project.image) }}">
+                </div>
+                {% if project.url %}
+                <div class="card-action">
+                    <a href="{{ project.url }}">Lien vers le projet</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block header %}
+    <h1>Contact</h1>
+{% endblock %}
+
+{% block content %}
+
+    <h3>Réseaux sociaux</h3>
+    <div class="row" id="contact-social-networks">
+        <a href="https://github.com/julienc91"><i class="fa fa-github github logo" aria-hidden="true"></i></a>
+        <a href="https://stackoverflow.com/users/2679935/julienc"><i class="fa fa-stack-overflow stackoverflow logo" aria-hidden="true"></i></a>
+        <a href="https://www.linkedin.com/in/julien-chaumont-188a833b"><i class="fa fa-linkedin linkedin logo" aria-hidden="true"></i></a>
+        <a href="https://twitter.com/julienc91"><i class="fa fa-twitter twitter logo" aria-hidden="true"></i></a>
+    </div>
+
+    <h3>Mail</h3>
+    <div class="row">
+        <form id="contact-form" class="col s12" action="{{ url_for('contact.contact_send_message') }}" method="post">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="name" name="name" type="text" class="validate" maxlength="60" value="{{ name }}" required>
+                    <label for="name">Nom</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="email" name="email" type="email" class="validate" maxlength="60" value="{{ email }}" required>
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="subject" name="subject" type="text" class="validate" maxlength="60" value="{{ subject }}" required>
+                    <label for="subject">Sujet</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="content" name="content" class="materialize-textarea validate" maxlength="2000" required>{{ content }}</textarea>
+                    <label for="content">Message</label>
+                </div>
+            </div>
+            <div class="row">
+                {{ recaptcha }}
+            </div>
+            <input id="contact-submit" class="btn disabled" type="submit" value="Envoyer">
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/contact.js') }}"></script>
+{% endblock %}

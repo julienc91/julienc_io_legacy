@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Projets{% endblock %}
+
+{% block header %}
+    <h1>Projets</h1>
+{% endblock %}
+
+
+{% block content %}
+
+    {% for project in projects %}
+    <h3><a href="{{ url_for('projects.project', slug=project.slug) }}">{{ project.name }}</a></h3>
+    <div class="row">
+        <div class="col s12 l8">
+            <div class="flow-text">
+                {{ project.description | markdown }}
+            </div>
+            <div>
+                {% for tag in project.tags | sort(attribute='name') %}
+                    <a href="{{ url_for('tags.tag', slug=tag.slug) }}">
+                        <div class="chip">
+                            <img src="{{ url_for('static', filename=tag.image) }}" alt="">
+                            {{ tag.name }}
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col hide-on-med-and-down l4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{ url_for('static', filename=project.image) }}">
+                </div>
+                {% if project.url %}
+                <div class="card-action">
+                    <a href="{{ project.url }}">Lien vers le projet</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}

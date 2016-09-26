@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Tags{% endblock %}
+
+{% block header %}
+    <h1>Tags</h1>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row tag-list">
+    {% for tag in tags | sort(attribute='name') %}
+        <a href="{{ url_for('tags.tag', slug=tag.slug) }}">
+            <div class="card col s4 l3">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img src="{{ url_for('static', filename=tag.image) }}" class="responsive-img" alt="">
+                </div>
+                <div class="card-content">
+                    <span class="card-title grey-text text-darken-4">{{ tag.name }}</span>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+    </div>
+
+{% endblock %}

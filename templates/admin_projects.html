@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Projets{% endblock %}
+
+{% block breadcrumb %}
+    <nav>
+        <div class="nav-wrapper content">
+            <div class="col s12">
+                <a href="{{ url_for('admin.admin') }}" class="breadcrumb">Administration</a>
+                <span class="breadcrumb">Projets</span>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block header %}
+    <h1>Projets</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+
+        <div>
+            <a class="waves-effect waves-light btn" href="{{ url_for("admin.admin_project") }}">
+                <i class="material-icons left">add</i>Nouveau projet
+            </a>
+        </div>
+
+        {% if projects %}
+
+        <table id="project-list">
+            <thead>
+                <tr>
+                    <th class="hide">ID</th>
+                    <th class="hide">Priorité</th>
+                    <th>Nom</th>
+                    <th>URL</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for project in projects | sort(attribute='priority') %}
+                <tr>
+                    <td class="id hide">{{ project.id }}</td>
+                    <td class="priority hide">{{ project.priority }}</td>
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.url }}</td>
+                    <td class="right-align">
+                        <a href="{{ url_for('admin.admin_project', project_id=project.id) }}"><i class="material-icons">mode_edit</i></a>
+                        <a href="{{ url_for('admin.admin_project_delete', project_id=project.id) }}" onclick="confirm_deletion(this); return false;"><i class="material-icons">delete</i></a></td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+        <div id="confirm-dialog" class="modal">
+            <div class="modal-content">
+                <h4>Confirmation</h4>
+                <p>Le projet sera définitivement supprimé. Voulez-vous continuer&nbsp;?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="waves-effect waves-red btn-flat" onclick="$('#confirm-dialog').closeModal(); return false;">Annuler</a>
+                <a href="#" class="waves-effect waves-green btn-flat" id="confirm-dialog-yes">Oui</a>
+           </div>
+        </div>
+
+        {% else %}
+
+            <p>Aucun projet</p>
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin_projects.js') }}"></script>
+{% endblock %}

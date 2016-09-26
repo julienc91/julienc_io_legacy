@@ -1,0 +1,8 @@
+Flask==0.11.1
+Flask-Login==0.3.2
+Flask-Mail==0.9.1
+Flask-Misaka==0.4.1
+Flask-Principal==0.4.0
+Flask-ReCaptcha==0.4.2
+Flask-SQLAlchemy==2.1
+validate-email==1.3

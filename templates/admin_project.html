@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Projet{% endblock %}
+
+{% block breadcrumb %}
+    <nav>
+        <div class="nav-wrapper content">
+            <div class="col s12">
+                <a href="{{ url_for('admin.admin') }}" class="breadcrumb">Administration</a>
+                <a href="{{ url_for('admin.admin_projects') }}" class="breadcrumb">Projets</a>
+                {% if project %}
+                    <span class="breadcrumb">{{ project.name }}</span>
+                {% else %}
+                    <span class="breadcrumb">Nouveau</span>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block header %}
+    <h1>Projet</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <form class="col s12" action="{{ url_for('admin.admin_project_update', project_id=project.id if project else 0) }}" method="post" enctype="multipart/form-data">
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="name" name="name" type="text" class="validate" value="{{ name or (project.name if project else "") }}" required>
+                    <label for="name">Nom</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="url" name="url" type="url" class="validate" value="{{ url or (project.url if project else "") }}">
+                    <label for="url">URL</label>
+                </div>
+            </div>
+
+            {% if project and project.image %}
+            <div class="row">
+                <div class="input-field col s10">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>Image</span>
+                            <input type="file" name="image">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="col s2">
+                    <img src="{{ url_for('static', filename=project.image) }}" alt="" class="responsive-img"/>
+                </div>
+            </div>
+            {% else %}
+            <div class="row">
+                <div class="input-field col s12">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>Image</span>
+                            <input type="file" name="image" required>
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <textarea id="description" name="description" class="validate materialize-textarea" rows="10"
+                              required>{{ description or (project.description if project else "") }}</textarea>
+                    <label for="description">Description</label>
+                </div>
+                <div class="input-field col s6" id="description-preview"></div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <label>Tags</label>
+                    <div id="tags" class="chips">
+                        {% for tag in tags | sort(attribute='name') %}
+                            <div class="chip chip-selection {% if (tag.id in tag_ids) or (not tag_ids and project and tag in project.tags) %}enabled{% else %}disabled{% endif %}" data-tag-id="{{ tag.id }}">
+                                <img src="{{ url_for('static', filename=tag.image) }}" alt="">
+                                {{ tag.name }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <input id="tag-ids" name="tag-ids" type="hidden">
+
+            <input class="btn waves-effect waves-light" type="submit" value="Enregistrer">
+
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='bower_components/showdown/dist/showdown.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin_project.js') }}"></script>
+{% endblock %}

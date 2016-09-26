@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block breadcrumb %}
+    <nav>
+        <div class="nav-wrapper content">
+            <div class="col s12">
+                <a href="{{ url_for('articles.articles') }}" class="breadcrumb">Articles</a>
+                <span class="breadcrumb">{{ article.title }}</span>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block header %}
+    <h1>{{ article.title }}
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('admin.admin_article', article_id=article.id) }}"><i class="material-icons">mode_edit</i></a>
+        {% endif %}
+    </h1>
+
+    <div class="article-date">Le {{ article.creation_date.strftime('%d %B %Y') }}</div>
+{% endblock %}
+
+{% block content %}
+    <div>
+        {% for tag in article.tags | sort(attribute='name')%}
+            <a href="{{ url_for('tags.tag', slug=tag.slug) }}">
+                <div class="chip">
+                    <img src="{{ url_for('static', filename=tag.image) }}" alt="">
+                    {{ tag.name }}
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="row flow-text">{{ article.content | markdown }}</div>
+
+{% endblock %}
