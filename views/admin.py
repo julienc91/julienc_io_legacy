@@ -3,6 +3,7 @@
 import re
 import os
 import json
+import unicodedata
 from http import HTTPStatus
 from flask import Blueprint, render_template, request, url_for, redirect, current_app, jsonify, flash
 from flask_login import login_required
@@ -13,6 +14,12 @@ from models import Article, Project, Tag
 
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
 admin_permission = Permission(RoleNeed("admin"))
+
+
+def create_slug(title):
+    nfkd_form = unicodedata.normalize('NFKD', title)
+    slug = nfkd_form.encode('ASCII', 'ignore')
+    return re.sub('[^A-Za-z0-9]+', '_', slug.lower())
 
 
 @admin_blueprint.route('/admin')
@@ -74,7 +81,7 @@ def admin_article_update(article_id=None):
         flash("Le contenu est vide", "error")
         return admin_article(article_id, title, content, tag_ids)
 
-    slug = re.sub('[^A-Za-z0-9]+', '_', title.lower())
+    slug = create_slug(title)
 
     tags = []
     for tag_id in tag_ids:
@@ -172,7 +179,7 @@ def admin_project_update(project_id=None):
         flash("La description est vide", "error")
         return admin_project(project_id, name, url, description, tag_ids)
 
-    slug = re.sub('[^A-Za-z0-9]+', '_', name.lower())
+    slug = create_slug(name)
 
     tags = []
     for tag_id in tag_ids:
@@ -278,7 +285,7 @@ def admin_tag_update(tag_id=None):
         flash("Le nom n'est pas valide", "error")
         return admin_tag(tag_id)
 
-    slug = re.sub('[^A-Za-z0-9]+', '_', name.lower())
+    slug = create_slug(name)
 
     image = request.files.get("image")
     if image.filename:
