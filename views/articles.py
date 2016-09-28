@@ -14,7 +14,7 @@ def articles():
 
 
 @articles_blueprint.route('/<int:article_id>', defaults={'slug': None})
-@articles_blueprint.route('/<int:article_id>/<slug>')
+@articles_blueprint.route('/<int:article_id>/<slug>', strict_slashes=False)
 @articles_blueprint.route('/articles/<int:article_id>', defaults={'slug': None}, alias=True)
 @articles_blueprint.route('/articles/<int:article_id>/<slug>', alias=True)
 def article(article_id, slug):
