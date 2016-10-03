@@ -18,7 +18,7 @@ admin_permission = Permission(RoleNeed("admin"))
 
 def create_slug(title):
     nfkd_form = unicodedata.normalize('NFKD', title)
-    slug = nfkd_form.encode('ASCII', 'ignore')
+    slug = nfkd_form.encode('ASCII', 'ignore').decode("utf8")
     return re.sub('[^A-Za-z0-9]+', '_', slug.lower())
 
 

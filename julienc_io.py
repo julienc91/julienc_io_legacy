@@ -54,9 +54,13 @@ app.register_blueprint(tags_blueprint)
 @app.errorhandler(401)
 @app.errorhandler(403)
 @app.errorhandler(404)
-@app.errorhandler(500)
 def error_handler(error):
-    return render_template("error.html", error=error), error.code
+    return render_template("error.html", error=error, code=error.code), error.code
+
+
+@app.errorhandler(500)
+def error_500_handler(error):
+    return render_template("error.html", error=error, code=500), 500
 
 
 @identity_loaded.connect_via(app)
