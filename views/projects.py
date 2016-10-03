@@ -6,7 +6,7 @@ from models import Project
 projects_blueprint = Blueprint('projects', __name__, template_folder='templates')
 
 
-@projects_blueprint.route('/projects')
+@projects_blueprint.route('/projects', strict_slashes=False)
 def projects():
     all_projects = Project.query.order_by(Project.priority, Project.name).all()
     return render_template("projects.html", projects=all_projects)

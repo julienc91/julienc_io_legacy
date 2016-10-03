@@ -8,7 +8,7 @@ from validate_email import validate_email
 contact_blueprint = Blueprint('contact', __name__, template_folder='templates')
 
 
-@contact_blueprint.route('/contact')
+@contact_blueprint.route('/contact', strict_slashes=False)
 def contact(name="", email="", subject="", content=""):
     return render_template("contact.html", name=name, email=email,
                            subject=subject, content=content)

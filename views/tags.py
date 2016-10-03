@@ -6,7 +6,7 @@ from models import Tag, Project, Article
 tags_blueprint = Blueprint('tags', __name__, template_folder='templates')
 
 
-@tags_blueprint.route('/tags')
+@tags_blueprint.route('/tags', strict_slashes=False)
 def tags():
     all_tags = Tag.query.all()
     return render_template("tags.html", tags=all_tags)
