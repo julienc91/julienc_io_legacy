@@ -78,6 +78,6 @@
 
 {% block js %}
     <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
-    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/admin.js') }}"></script>
-    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/admin_projects.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/admin.min.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/admin_projects.min.js') }}"></script>
 {% endblock %}

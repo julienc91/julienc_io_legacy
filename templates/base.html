@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/materialize/dist/css/materialize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/materialize/dist/css/materialize.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/fontawesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.min.css') }}">
     {% block css %}{% endblock %}
 </head>
 <body>
@@ -76,8 +76,8 @@
     <!-- js scripts -->
     <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='bower_components/materialize/dist/js/materialize.min.js') }}"></script>
-    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/main.min.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/analytics.min.js') }}"></script>
     {% block js %}{% endblock %}
 
 </body>

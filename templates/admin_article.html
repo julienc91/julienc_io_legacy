@@ -100,6 +100,6 @@
 
 {% block js %}
     <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='bower_components/showdown/dist/showdown.min.js') }}"></script>
-    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/admin.js') }}"></script>
-    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/admin_article.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/admin.min.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/admin_article.min.js') }}"></script>
 {% endblock %}
