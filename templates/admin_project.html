@@ -98,7 +98,7 @@
 
             <input id="tag-ids" name="tag-ids" type="hidden">
 
-            <input class="btn waves-effect waves-light" type="submit" value="Enregistrer">
+            <input class="btn" type="submit" value="Enregistrer">
 
         </form>
     </div>
@@ -106,7 +106,7 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{{ url_for('static', filename='bower_components/showdown/dist/showdown.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/admin_project.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='bower_components/showdown/dist/showdown.min.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/admin.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/admin_project.js') }}"></script>
 {% endblock %}

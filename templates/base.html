@@ -5,7 +5,7 @@
     <title>Julien Chaumont | {% block title %}{% endblock %}</title>
     <meta name='author' content='Julien Chaumont'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/materialize/dist/css/materialize.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/fontawesome/css/font-awesome.min.css') }}">
@@ -29,14 +29,14 @@
                 </div>
             </div>
         </li>
-        <li class="menu-entry"><a class="waves-effect" href="{{ url_for('articles.articles') }}"><i class="material-icons">rss_feed</i>Articles</a></li>
-        <li class="menu-entry"><a class="waves-effect" href="{{ url_for('projects.projects') }}"><i class="material-icons">code</i>Projets</a></li>
-        <li class="menu-entry"><a class="waves-effect" href="{{ url_for('tags.tags') }}"><i class="material-icons">label_outline</i>Tags</a></li>
-        <li class="menu-entry"><a class="waves-effect" href="{{ url_for('contact.contact' ) }}"><i class="material-icons">message</i>Contact</a></li>
-        <li class="menu-entry"><a class="waves-effect" href="{{ url_for('about.about' ) }}"><i class="material-icons">question_answer</i>À propos</a></li>
+        <li class="menu-entry"><a href="{{ url_for('articles.articles') }}"><i class="material-icons">rss_feed</i>Articles</a></li>
+        <li class="menu-entry"><a href="{{ url_for('projects.projects') }}"><i class="material-icons">code</i>Projets</a></li>
+        <li class="menu-entry"><a href="{{ url_for('tags.tags') }}"><i class="material-icons">label_outline</i>Tags</a></li>
+        <li class="menu-entry"><a href="{{ url_for('contact.contact' ) }}"><i class="material-icons">message</i>Contact</a></li>
+        <li class="menu-entry"><a href="{{ url_for('about.about' ) }}"><i class="material-icons">question_answer</i>À propos</a></li>
         {% if current_user.is_authenticated %}
-            <li class="menu-entry"><a class="waves-effect" href="{{ url_for('admin.admin') }}"><i class="material-icons">settings</i>Administration</a></li>
-            <li class="menu-entry"><a class="waves-effect" href="{{ url_for('users.logout') }}"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
+            <li class="menu-entry"><a href="{{ url_for('admin.admin') }}"><i class="material-icons">settings</i>Administration</a></li>
+            <li class="menu-entry"><a href="{{ url_for('users.logout') }}"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
         {% endif %}
     </ul>
     <a href="#" data-activates="menu" id="collapse-menu" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -74,10 +74,10 @@
 
 
     <!-- js scripts -->
-    <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='bower_components/materialize/dist/js/materialize.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='bower_components/materialize/dist/js/materialize.min.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/analytics.js') }}"></script>
     {% block js %}{% endblock %}
 
 </body>

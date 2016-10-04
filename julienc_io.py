@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import locale
-from flask import Flask, render_template
+import random
+from flask import Flask, render_template, g
 from flask_login import current_user
 from flask_principal import identity_loaded, RoleNeed
 from views.articles import articles_blueprint
@@ -61,6 +62,24 @@ def error_handler(error):
 @app.errorhandler(500)
 def error_500_handler(error):
     return render_template("error.html", error=error, code=500), 500
+
+
+@app.before_request
+def generate_csp_nonce():
+    g.nonce = random.getrandbits(256)
+
+
+@app.after_request
+def apply_csp_headers(response):
+    if not response.headers.get("Content-Security-Policy"):
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'self';"
+            "font-src 'self' fonts.gstatic.com;"
+            "img-src 'self' https:;"
+            "script-src 'nonce-{NONCE}' 'strict-dynamic';"
+            "style-src 'self' fonts.googleapis.com;"
+            "object-src none;").format(NONCE=g.nonce)
+    return response
 
 
 @identity_loaded.connect_via(app)

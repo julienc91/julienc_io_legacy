@@ -21,7 +21,7 @@
     <div class="row">
 
         <div>
-            <a class="waves-effect waves-light btn" href="{{ url_for("admin.admin_article", article_id=None) }}">
+            <a class="btn" href="{{ url_for("admin.admin_article", article_id=None) }}">
                 <i class="material-icons left">add</i>Nouvel article
             </a>
         </div>
@@ -59,8 +59,8 @@
                 <p>L'article sera définitivement supprimé. Voulez-vous continuer&nbsp;?</p>
             </div>
             <div class="modal-footer">
-                <a href="#" class="waves-effect waves-red btn-flat" onclick="$('#confirm-dialog').closeModal(); return false;">Annuler</a>
-                <a href="#" class="waves-effect waves-green btn-flat" id="confirm-dialog-yes">Oui</a>
+                <a href="#" class="btn-flat" onclick="$('#confirm-dialog').closeModal(); return false;">Annuler</a>
+                <a href="#" class="btn-flat" id="confirm-dialog-yes">Oui</a>
            </div>
         </div>
 
@@ -75,5 +75,5 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/admin.js') }}"></script>
 {% endblock %}

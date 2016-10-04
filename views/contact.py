@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, render_template, request, redirect, flash, current_app
+from flask import Blueprint, render_template, request, redirect, flash, current_app, make_response, g
 from flask_mail import Message
 from extensions import recaptcha, mail
 from validate_email import validate_email
@@ -10,8 +10,19 @@ contact_blueprint = Blueprint('contact', __name__, template_folder='templates')
 
 @contact_blueprint.route('/contact', strict_slashes=False)
 def contact(name="", email="", subject="", content=""):
-    return render_template("contact.html", name=name, email=email,
-                           subject=subject, content=content)
+    r = make_response(render_template("contact.html", name=name, email=email,
+                                      subject=subject, content=content))
+
+    # specific CSP configuration for reCAPTCHA: style-src unsafe-inline is disabled everywhere else
+    r.headers["Content-Security-Policy"] = (
+        "default-src 'self';"
+        "font-src 'self' fonts.gstatic.com;"
+        "img-src 'self' https:;"
+        "script-src 'nonce-{NONCE}' 'strict-dynamic';"
+        "style-src 'self' 'unsafe-inline' fonts.googleapis.com;"
+        "child-src www.google.com;"
+        "object-src none;").format(NONCE=g.nonce)
+    return r
 
 
 @contact_blueprint.route('/contact', methods=['POST'])

@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="row">
-                {{ recaptcha }}
+                {{ recaptcha(g.nonce) }}
             </div>
             <input id="contact-submit" class="btn disabled" type="submit" value="Envoyer">
         </form>
@@ -53,5 +53,5 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{{ url_for('static', filename='js/contact.js') }}"></script>
+    <script nonce="{{ g.nonce }}" src="{{ url_for('static', filename='js/contact.js') }}"></script>
 {% endblock %}

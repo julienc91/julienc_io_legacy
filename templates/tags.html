@@ -13,7 +13,7 @@
     {% for tag in tags | sort(attribute='name') %}
         <a href="{{ url_for('tags.tag', slug=tag.slug) }}">
             <div class="card col s4 l3">
-                <div class="card-image waves-effect waves-block waves-light">
+                <div class="card-image">
                     <img src="{{ url_for('static', filename=tag.image) }}" class="responsive-img" alt="">
                 </div>
                 <div class="card-content">
