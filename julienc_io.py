@@ -76,9 +76,9 @@ def apply_csp_headers(response):
             "default-src 'self';"
             "font-src 'self' fonts.gstatic.com;"
             "img-src 'self' https:;"
-            "script-src 'nonce-{NONCE}' 'strict-dynamic';"
+            "script-src www.google-analytics.com 'nonce-{NONCE}' 'strict-dynamic';"
             "style-src 'self' fonts.googleapis.com;"
-            "object-src none;").format(NONCE=g.nonce)
+            "object-src 'none';").format(NONCE=g.nonce)
     return response
 
 

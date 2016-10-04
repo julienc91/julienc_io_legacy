@@ -18,10 +18,10 @@ def contact(name="", email="", subject="", content=""):
         "default-src 'self';"
         "font-src 'self' fonts.gstatic.com;"
         "img-src 'self' https:;"
-        "script-src 'nonce-{NONCE}' 'strict-dynamic';"
+        "script-src www.google-analytics.com 'nonce-{NONCE}' 'strict-dynamic';"
         "style-src 'self' 'unsafe-inline' fonts.googleapis.com;"
         "child-src www.google.com;"
-        "object-src none;").format(NONCE=g.nonce)
+        "object-src 'none';").format(NONCE=g.nonce)
     return r
 
 
