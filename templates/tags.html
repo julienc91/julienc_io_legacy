@@ -12,7 +12,7 @@
     <div class="row tag-list">
     {% for tag in tags | sort(attribute='name') %}
         <a href="{{ url_for('tags.tag', slug=tag.slug) }}">
-            <div class="card col s4 l3">
+            <div class="card col s6 m4 l3">
                 <div class="card-image">
                     <img src="{{ url_for('static', filename=tag.image) }}" class="responsive-img" alt="">
                 </div>
