@@ -16,6 +16,26 @@
         <a href="https://twitter.com/julienc91"><i class="fa fa-twitter twitter logo" aria-hidden="true"></i></a>
     </div>
 
+    <h3>Clé PGP</h3>
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">fingerprint</i>
+                    <input id="fingerprint" type="text" readonly value="73B3&nbsp;6CF9&nbsp;5EC3&nbsp;5C38&nbsp;0022&nbsp;18D6&nbsp;EF4D&nbsp;99AD&nbsp;B2A1&nbsp;823C">
+                    <label for="fingerprint">Empreinte</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">vpn_key</i>
+                    <input id="key" type="text" readonly value="julienc.io/pgp">
+                    <label for="key">Clé publique</label>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <h3>Mail</h3>
     <div class="row">
         <form id="contact-form" class="col s12" action="{{ url_for('contact.contact_send_message') }}" method="post">

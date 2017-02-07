@@ -15,7 +15,6 @@ from views.tags import tags_blueprint
 from extensions import recaptcha, mail, sqlalchemy, login_manager, principal, misaka
 
 app = Flask(__name__)
-app.debug = True
 app.config.update(
     SECRET_KEY="MY_SECRET_KEY",
     DEBUG=False,
@@ -29,7 +28,7 @@ app.config.update(
     MAIL_DEFAULT_SENDER="MY_MAIL_DEFAULT_SENDER",
     MAIL_DEFAULT_RECIPIENTS=["MY_MAIL_DEFAULT_RECIPIENT"],
     SQLALCHEMY_DATABASE_URI="MY_DATABASE_URI",
-    SQLALCHEMY_TRACK_MODIFICATIONS=True
+    SQLALCHEMY_TRACK_MODIFICATIONS=False
 )
 
 recaptcha.init_app(app)

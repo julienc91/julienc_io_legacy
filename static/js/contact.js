@@ -1,6 +1,4 @@
 $(document).ready(function(){
-
-
     $('.g-recaptcha').attr("data-callback", "validate_fields");
     $("#contact-form input, #contact-form select, #contact-form textarea").on("keyup", validate_fields);
 });
@@ -18,3 +16,7 @@ function validate_fields() {
     }
     $("#contact-submit").toggleClass("disabled", !is_valid);
 }
+
+$("#key").on("click", function() {
+    location.href = '/pgp';
+});
